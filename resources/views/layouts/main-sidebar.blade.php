@@ -38,7 +38,7 @@
                     </svg><span class="side-menu__label">الرئيسية</span></a>
             </li>
 
-            @can('الفواتير')
+
                 <li class="side-item side-item-category">الفواتير</li>
 
                 <li class="slide">
@@ -51,38 +51,32 @@
                         </svg><span class="side-menu__label">الفواتير</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
 
-                        @can('قائمة الفواتير')
+
 
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'invoices')) }}">قائمة الفواتير</a></li>
 
-                        @endcan
 
-                        @can('الفواتير المدفوعة')
+
 
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_Paid')) }}">الفواتير المدفوعة</a>
 
-                            @endcan
 
                         </li>
 
-                        @can('الفواتير الغير مدفوعة')
+
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_UnPaid')) }}">الفواتير
                                     الغيرمدفوعة</a>
                             </li>
-                        @endcan
 
-                        @can('الفواتير المدفوعة')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_Partial')) }}">الفواتير المدفوعة
+
+                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_Partial')) }}">الفواتير المدفوعة
                                     جزئيا</a>
                             </li>
-                        @endcan
 
-                        @can('ارشيف الفواتير')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'Archive')) }}">ارشيف الفواتير</a></li>
-                        @endcan
-                    </ul>
+
+                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Archive')) }}">ارشيف الفواتير</a></li>
+                     </ul>
                 </li>
-            @endcan
 
             @can('التقارير')
                 <li class="side-item side-item-category">التقارير</li>
@@ -108,8 +102,8 @@
                 </li>
             @endcan
 
-            @can('المستخدمين')
-                <li class="side-item side-item-category">المستخدمين</li>
+
+                <li class="side-item side-item-category">العملاء</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
                             xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -117,18 +111,13 @@
                             <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3" />
                             <path
                                 d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z" />
-                        </svg><span class="side-menu__label">المستخدمين</span><i class="angle fe fe-chevron-down"></i></a>
+                        </svg><span class="side-menu__label">العملاء</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        @can('قائمة المستخدمين')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">قائمة المستخدمين</a></li>
-                        @endcan
+                             <li><a class="slide-item" href="{{ url('/' . ($page = 'users')) }}">قائمة العملاء</a></li>
 
-                        @can('صلاحيات المستخدمين')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'roles')) }}">صلاحيات المستخدمين</a></li>
-                        @endcan
-                    </ul>
+                             <li><a class="slide-item" href="{{ url('/' . ($page = 'roles')) }}">صلاحيات المستخدمين</a></li>
+                     </ul>
                 </li>
-            @endcan
 
             @can('الاعدادات')
                 <li class="side-item side-item-category">الاعدادات</li>
