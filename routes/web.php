@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 //New
-Route::resource('customers', 'InvoicesController');
+Route::resource('customers', 'CustomersController');
 
 
 

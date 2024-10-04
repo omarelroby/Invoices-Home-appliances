@@ -115,7 +115,7 @@
                     <ul class="slide-menu">
                              <li><a class="slide-item" href="{{ url('/' . ($page = 'customers')) }}">قائمة العملاء</a></li>
 
-                             <li><a class="slide-item" href="{{ url('/' . ($page = 'customer/create')) }}">إضافة عميل جديد</a></li>
+                             <li><a class="slide-item" href="{{ url('/' . ($page = 'customers/create')) }}">إضافة عميل جديد</a></li>
                      </ul>
                 </li>
 
