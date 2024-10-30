@@ -32,4 +32,8 @@ class invoices extends Model
    {
    return $this->belongsTo('App\sections');
    }
+   public function customers()
+   {
+    return $this->belongsTo(Customer::class,'customer_id');
+   }
 }
