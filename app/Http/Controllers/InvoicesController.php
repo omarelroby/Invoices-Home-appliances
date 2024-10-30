@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Customer;
 use Illuminate\Support\Facades\Notification;
 use App\invoices;
 use App\sections;
@@ -35,8 +36,8 @@ class InvoicesController extends Controller
      */
     public function create()
     {
-        $sections = sections::all();
-        return view('invoices.add_invoice', compact('sections'));
+        $data['customers'] = Customer::all();
+        return view('invoices.add_invoice',$data);
     }
 
     /**
