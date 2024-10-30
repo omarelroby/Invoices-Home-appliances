@@ -50,62 +50,52 @@
                         {{-- 1 --}}
 
                         <div class="row">
-                            <div class="col">
-                                <label for="inputName" class="control-label">رقم الفاتورة</label>
-                                <input type="text" class="form-control" id="inputName" name="invoice_number"
+                            <div class="col-4">
+                                <label for="inputName" class="control-label"> الفاتورة</label>
+                                <input type="text" class="form-control" id="inputName" name="name"
                                     title="يرجي ادخال رقم الفاتورة" required>
                             </div>
-
-                            <div class="col">
-                                <label>تاريخ الفاتورة</label>
-                                <input class="form-control fc-datepicker" name="invoice_Date" placeholder="YYYY-MM-DD"
-                                    type="text" value="{{ date('Y-m-d') }}" required>
-                            </div>
-
-                            <div class="col">
-                                <label>تاريخ الاستحقاق</label>
-                                <input class="form-control fc-datepicker" name="Due_date" placeholder="YYYY-MM-DD"
-                                    type="text" required>
-                            </div>
-
-                        </div>
-
-                        {{-- 2 --}}
-                        <div class="row">
-                            <div class="col">
-                                <label for="inputName" class="control-label">القسم</label>
-                                <select name="Section" class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')">
-                                    <!--placeholder-->
-                                    <option value="" selected disabled>حدد القسم</option>
-                                    @foreach ($sections as $section)
-                                        <option value="{{ $section->id }}"> {{ $section->section_name }}</option>
+                            <div class="col-4">
+                                <label>اسم العميل</label>
+                                <select class="form-control fc-datepicker" name="day_of_pay"
+                                        required>
+                                    @foreach($customers as $customer)
+                                        <option value="{{$customer->id}}">{{$customer->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <div class="col">
-                                <label for="inputName" class="control-label">المنتج</label>
-                                <select id="product" name="product" class="form-control">
-                                </select>
+                            <div class="col-4">
+                                <label>تاريخ الفاتورة</label>
+                                <input readonly class="form-control fc-datepicker" name="invoice_date" placeholder="YYYY-MM-DD"
+                                    type="text" value="{{ date('Y-m-d') }}" required>
                             </div>
 
-                            <div class="col">
-                                <label for="inputName" class="control-label">مبلغ التحصيل</label>
-                                <input type="text" class="form-control" id="inputName" name="Amount_collection"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                            <div class="col-4">
+                                <label>تاريخ الاستحقاق</label>
+                                <select class="form-control fc-datepicker" name="day_of_pay"
+                                      required>
+                                    @for ($i = 1; $i <= 30; $i++)
+                                        <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                </select>
                             </div>
+                            <div class="col-4">
+                                <label>المنصرف</label>
+                                <input class="form-control" name="total_buy" id="total_buy" type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
+                            </div>
+                            <div class="col-4">
+                                <label>مقدمة الدفع</label>
+                                <input class="form-control" name="intro_cash" id="intro_cash" type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
+                            </div>
+                            <div class="col-4">
+                                <label>المبلغ المتبقي</label>
+                                <input class="form-control" readonly name="total_remain" id="total_remain" type="text" placeholder="المبلغ" required />
+                            </div>
+
                         </div>
 
 
-
-
-
-
-                            <div class="col">
-                                <label for="inputName" class="control-label">الاجمالي شامل الضريبة</label>
-                                <input type="text" class="form-control" id="Total" name="Total" readonly>
-                            </div>
                         </div>
 
 
@@ -223,7 +213,20 @@
 
         }
 
-    </script>
 
+    </script>
+    <script>
+        function calculateRemaining() {
+            // Get the values of مقدمة الدفع and المنصرف
+            let introCash = parseFloat(document.getElementById('intro_cash').value) || 0;
+            let totalBuy = parseFloat(document.getElementById('total_buy').value) || 0;
+
+            // Calculate the remaining amount
+            let remaining = introCash - totalBuy;
+
+            // Display the result in المبلغ المتبقي
+            document.getElementById('total_remain').value = remaining;
+        }
+    </script>
 
 @endsection
