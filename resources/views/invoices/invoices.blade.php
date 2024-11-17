@@ -96,6 +96,7 @@
                                     <th class="border-bottom-0">المبالغ المدفوعة</th>
                                     <th class="border-bottom-0">المبالغ المتبقية</th>
                                     <th class="border-bottom-0">تاريخ الدفع</th>
+                                    <th class="border-bottom-0">تاريخ آخر دفع</th>
 
                                     <th class="border-bottom-0">العمليات</th>
                                 </tr>
@@ -115,7 +116,7 @@
                                         <td>{{ $invoice->customers->name }}</td>
 
                                         <td>
-                                            @if ($invoice->status == 3)
+                                            @if ($invoice->status == 1)
                                                 <span class="text-success">مكتمل</span>
                                             @elseif($invoice->status == 2)
                                                 <span class="text-danger">متأخر</span>
@@ -127,6 +128,7 @@
                                         <td>{{ $invoice->total_buy }}</td>
                                         <td>{{ $invoice->total_remain }}</td>
                                         <td>{{ $invoice->day_of_pay }}</td>
+                                        <td>{{ $invoice->pay_date }}</td>
 
 
                                         <td>
@@ -156,19 +158,6 @@
                                                             حالة
                                                             الدفع</a>
 
-
-
-                                                        <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
-                                                            data-toggle="modal" data-target="#Transfer_invoice"><i
-                                                                class="text-warning fas fa-exchange-alt"></i>&nbsp;&nbsp;نقل الي
-                                                            الارشيف</a>
-
-
-
-                                                        <a class="dropdown-item" href="Print_invoice/{{ $invoice->id }}"><i
-                                                                class="text-success fas fa-print"></i>&nbsp;&nbsp;طباعة
-                                                            الفاتورة
-                                                        </a>
 
                                                 </div>
                                             </div>
@@ -214,34 +203,6 @@
     </div>
 
 
-    <!-- ارشيف الفاتورة -->
-    <div class="modal fade" id="Transfer_invoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ارشفة الفاتورة</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <form action="{{ route('invoices.destroy', 'test') }}" method="post">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
-                </div>
-                <div class="modal-body">
-                    هل انت متاكد من عملية الارشفة ؟
-                    <input type="hidden" name="invoice_id" id="invoice_id" value="">
-                    <input type="hidden" name="id_page" id="id_page" value="2">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-success">تاكيد</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     </div>
     <!-- row closed -->

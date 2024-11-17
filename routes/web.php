@@ -23,12 +23,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //New
 Route::resource('customers', 'CustomersController');
+Route::get('/Status_show/{id}', 'InvoicesController@show')->name('Status_show');
+Route::resource('invoices', 'InvoicesController');
 
 
 
 //End New
 
-Route::resource('invoices', 'InvoicesController');
 
 Route::resource('sections', 'SectionsController');
 
@@ -50,7 +51,6 @@ Route::post('delete_file', 'InvoicesDetailsController@destroy')->name('delete_fi
 
 Route::get('/edit_invoice/{id}', 'InvoicesController@edit');
 
-Route::get('/Status_show/{id}', 'InvoicesController@show')->name('Status_show');
 
 Route::post('/Status_Update/{id}', 'InvoicesController@Status_Update')->name('Status_Update');
 

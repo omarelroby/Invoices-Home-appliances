@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-4">
                                 <label>اسم العميل</label>
-                                <select class="form-control fc-datepicker" name="day_of_pay"
+                                <select class="form-control fc-datepicker" name="customer_id"
                                         required>
                                     @foreach($customers as $customer)
                                         <option value="{{$customer->id}}">{{$customer->name}}</option>
@@ -96,7 +96,7 @@
                         </div>
 
 
-                        </div>
+
 
 
                         <br>
@@ -222,7 +222,7 @@
             let totalBuy = parseFloat(document.getElementById('total_buy').value) || 0;
 
             // Calculate the remaining amount
-            let remaining = introCash - totalBuy;
+            let remaining = totalBuy-introCash   ;
 
             // Display the result in المبلغ المتبقي
             document.getElementById('total_remain').value = remaining;

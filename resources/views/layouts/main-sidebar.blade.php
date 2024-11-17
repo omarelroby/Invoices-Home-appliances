@@ -67,15 +67,14 @@
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_UnPaid')) }}">الفواتير
                                     الغيرمدفوعة</a>
                             </li>
+                        <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_Partial')) }}">الفواتير
+                                المتأخرة</a>
+                        </li>
 
 
-                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_Partial')) }}">الفواتير المدفوعة
-                                    جزئيا</a>
-                            </li>
 
 
-                             <li><a class="slide-item" href="{{ url('/' . ($page = 'Archive')) }}">ارشيف الفواتير</a></li>
-                     </ul>
+                      </ul>
                 </li>
 
             @can('التقارير')
