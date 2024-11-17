@@ -72,6 +72,20 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
+                    <form method="get" action="{{route('invoices.index')}}">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>بحث برقم الهاتف</label>
+                                        <input class="form-control" name="phone"    type="text" placeholder="رقم الهاتف" required oninput="calculateRemaining()" />
+                                    </div>
+                                    <div class="col-6"></div>
+                                    <div class="col-12"></div>
+                                    <div class=" col-6 d-flex justify-content-center my-2">
+                                        <button type="submit" class="btn btn-primary">بحث</button>
+                                    </div>
+                                </div>
+
+                    </form>
 
                         <a href="invoices/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
                                 class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>

@@ -22,12 +22,20 @@ class InvoicesController extends Controller
 
     public function index()
     {
-        $invoices = invoices::all();
+
+        $phone = Request()->phone; // Get the phone number from the request
+
+        if (!empty($phone)) {
+            $invoices = Invoices::whereHas('customers', function ($query) use ($phone) {
+                $query->where('phone', $phone); // Assuming 'phone' is a column in the customers table
+            })->get();
+        } else {
+            $invoices = Invoices::all(); // Fallback to fetch all invoices if no phone is provided
+        }
+
         foreach ($invoices as $invoice) {
             // Get the last payment date
 //            $lastPayDate = Carbon::parse($invoice->pay_date); // Assuming `last_pay_date` is a column in your invoices table
-
-            // Calculate the 5th day of the month for the current and previous months
             $dayOfPreviousMonth = Carbon::now()->subMonth()->startOfMonth()->addDays($invoice->date_of_pay - 1); // 05 of last month
             $dayOfCurrentMonth = Carbon::now()->startOfMonth()->addDays($invoice->date_of_pay - 1); // 05 of this month
             $payDate = Carbon::parse($invoice->pay_date);
