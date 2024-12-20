@@ -22,7 +22,7 @@ class CreateInvoicesTable extends Migration
             $table->text('total_buy')->nullable();
             $table->text('total_remain')->nullable();
             $table->text('day_of_pay')->nullable();
-            $table->tinyInteger('status')->default(0); // 1 complete 2 late 3 Uncomplete
+            $table->tinyInteger('status')->default(0); // 1 pay 2 late 3 complete
              $table->date('deleted_at')->nullable();
             $table->integer('Value_Status')->nullable(); // or use the correct data type for your needs
             $table->text('Total')->nullable(); // or use the correct data type for your needs
