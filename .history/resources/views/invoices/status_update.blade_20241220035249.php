@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-4">
                             <label>المبلغ المتبقي</label>
-                            <input class="form-control" readonly value="{{$invoices->total_remain}}" name="total_remain" id="total_remain_remain" type="text" placeholder="المبلغ" required />
+                            <input class="form-control" readonly value="{{$invoices->total_remain}}" name="total_remain_remain" id="total_remain_remain" type="text" placeholder="المبلغ" required />
                         </div>
                         <div class="col-4">
                             <label>مبلغ الدفع</label>

@@ -32,40 +32,18 @@ class InvoicesController extends Controller
         } else {
             $invoices = Invoices::all(); // Fetch all invoices if no phone number is provided
         }
+
         foreach ($invoices as $invoice) {
-            // Calculate the due date for the current month (e.g., 5th of the current month)
-            $dayOfCurrentMonth = Carbon::now()
-                ->startOfMonth()
-                ->addDays($invoice->day_of_pay - 1)
-                ->format('Y-m-d');
-
-            // Get the current date in the same format
-            $currentDate = Carbon::now()->format('Y-m-d');
-
-            // Ensure pay_date is formatted correctly for comparison
-            $payDate = Carbon::parse($invoice->pay_date)->format('Y-m-d');
-
-            // Debugging statement removed (dd)
-            // Check if the invoice is late
-            if ($currentDate > $dayOfCurrentMonth && $payDate < $dayOfCurrentMonth) {
+            $dayOfCurrentMonth = Carbon::now()->startOfMonth()->addDays($invoice->day_of_pay - 1); // Calculate due day (e.g., 5th of this month)
+            $currentDate = Carbon::now(); // Current date
+            dd( $dayOfCurrentMonth);
+             if ($currentDate->greaterThan($dayOfCurrentMonth) && $invoice->invoice_date <  ) {
                 $invoice->update([
-                    'status' => 2, // Late
-                ]);
-            }
-            // Check if the invoice is uncompleted (not late, but total remains unpaid)
-            elseif ($payDate >= $dayOfCurrentMonth && $invoice->total_remain > 0) {
-                $invoice->update([
-                    'status' => 3, // Uncomplete
-                ]);
-            }
-            // Otherwise, mark it as complete
-            else {
-                $invoice->update([
-                    'status' => 1, // Complete
+                    'status' => 2,
+                    'invoice_date' => $currentDate->toDateString(), // Update invoice_date to today
                 ]);
             }
         }
-
 
         return view('invoices.invoices', compact('invoices'));
     }
@@ -91,7 +69,6 @@ class InvoicesController extends Controller
             'intro_cash' => $request->intro_cash,
             'total_remain' => $request->total_remain_remain,
             'customer_id' => $request->customer_id,
-            'pay_date' => Carbon::now(),
         ]);
 
 
@@ -187,12 +164,12 @@ class InvoicesController extends Controller
             }
             else
             {
-
-                $remain=$request->total_remain-$request->cash;
+                $remain=$invoices->total_remain_remain-$request->cash;
                 $invoices->status=0;
                 $invoices->total_remain=$remain;
                 $invoices->pay_date=$request->pay_date;
                 $invoices->save();
+
 
             }
         }

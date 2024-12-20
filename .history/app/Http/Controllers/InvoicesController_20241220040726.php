@@ -33,36 +33,24 @@ class InvoicesController extends Controller
             $invoices = Invoices::all(); // Fetch all invoices if no phone number is provided
         }
         foreach ($invoices as $invoice) {
-            // Calculate the due date for the current month (e.g., 5th of the current month)
+            // Calculate the due date (e.g., 5th of the current month) and format it
             $dayOfCurrentMonth = Carbon::now()
                 ->startOfMonth()
                 ->addDays($invoice->day_of_pay - 1)
                 ->format('Y-m-d');
 
-            // Get the current date in the same format
-            $currentDate = Carbon::now()->format('Y-m-d');
+            $currentDate = Carbon::now()->format('Y-m-d'); // Format current date for consistency
 
-            // Ensure pay_date is formatted correctly for comparison
-            $payDate = Carbon::parse($invoice->pay_date)->format('Y-m-d');
-
-            // Debugging statement removed (dd)
-            // Check if the invoice is late
-            if ($currentDate > $dayOfCurrentMonth && $payDate < $dayOfCurrentMonth) {
+            // Check if the invoice_date is missing and set a default
+            if (empty($invoice->invoice_date)) {
                 $invoice->update([
-                    'status' => 2, // Late
+                    'invoice_date' => Carbon::now()->startOfMonth()->addDays(4)->format('Y-m-d'),
                 ]);
             }
-            // Check if the invoice is uncompleted (not late, but total remains unpaid)
-            elseif ($payDate >= $dayOfCurrentMonth && $invoice->total_remain > 0) {
-                $invoice->update([
-                    'status' => 3, // Uncomplete
-                ]);
-            }
-            // Otherwise, mark it as complete
-            else {
-                $invoice->update([
-                    'status' => 1, // Complete
-                ]);
+
+            // Check if the current date has passed the due date
+            if ($currentDate > $dayOfCurrentMonth) {
+                $invoice->update(['status' => 2]);
             }
         }
 
