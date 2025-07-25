@@ -157,6 +157,17 @@
                     </ul>
                 </li>
             @endcan
+            <li class="side-item side-item-category">الأقساط</li>
+            <li class="slide">
+                <a class="side-menu__item" href="{{ url('/qist') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm1 17.93c-3.95-.49-7-3.85-7-7.93s3.05-7.44 7-7.93V5h2V3.07c1.03.13 2 .45 2.87.93H13v2h2.24c.25.31.48.65.68 1H13v2h6.74c.08.33.15.66.19 1H13v2h6.93c-.04.34-.11.67-.19 1H13v2h5.92c-.2.35-.43.69-.68 1H13v2h2.87c-.87.48-1.84.8-2.87.93V19h-2v-1.07z"/>
+                        <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                    <span class="side-menu__label">قسط</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

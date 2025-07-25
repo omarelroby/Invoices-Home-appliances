@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 
 Auth::routes();
 //Auth::routes(['register' => false]);
@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('customers', 'CustomersController');
 Route::get('/Status_show/{id}', 'InvoicesController@show')->name('Status_show');
 Route::resource('invoices', 'InvoicesController');
+Route::resource('qist', 'QistController')->only(['index', 'create', 'store']);
 
 
 
@@ -83,3 +84,6 @@ Route::get('customers_report', 'Customers_Report@index')->name("customers_report
 Route::post('Search_customers', 'Customers_Report@Search_customers');
 
 Route::get('/{page}', 'AdminController@index');
+
+Route::get('invoices/{invoice}/qist', 'QistController@invoiceQist')->name('invoices.qist');
+

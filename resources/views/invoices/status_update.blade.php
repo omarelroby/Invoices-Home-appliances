@@ -2,7 +2,7 @@
 @section('css')
 @endsection
 @section('title')
-    تغير حالة الدفع
+    دفع قسط جديد
 @stop
 @section('page-header')
     <!-- breadcrumb -->
@@ -10,7 +10,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    تغير حالة الدفع</span>
+                    دفع قسط جديد    </span>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
                             <input class="form-control" readonly value="{{$invoices->total_remain}}" name="total_remain" id="total_remain_remain" type="text" placeholder="المبلغ" required />
                         </div>
                         <div class="col-4">
-                            <label>مبلغ الدفع</label>
+                            <label>مبلغ القسط</label>
                             <input class="form-control" name="cash"   type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
                         </div>
 
