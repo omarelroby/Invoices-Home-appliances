@@ -91,7 +91,8 @@ class InvoicesController extends Controller
             'intro_cash' => $request->intro_cash,
             'total_remain' => $request->total_remain_remain,
             'customer_id' => $request->customer_id,
-         ]);
+            'pay_date' => Carbon::now(),
+        ]);
 
 
         session()->flash('Add', 'تم اضافة الفاتورة بنجاح');

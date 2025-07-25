@@ -85,13 +85,14 @@ class InvoicesController extends Controller
 
         invoices::create([
             'name' => $request->name,
-            'day_of_pay' => $request->day_of_pay,
+            'day_of_pay' => $request->pay_date,
             'invoice_date' => $request->invoice_date,
             'total_buy' => $request->total_remain_buy,
             'intro_cash' => $request->intro_cash,
             'total_remain' => $request->total_remain_remain,
             'customer_id' => $request->customer_id,
-         ]);
+            'pay_date' => Carbon::now(),
+        ]);
 
 
         session()->flash('Add', 'تم اضافة الفاتورة بنجاح');
