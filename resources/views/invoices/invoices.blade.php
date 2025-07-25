@@ -105,8 +105,9 @@
                                     <th class="border-bottom-0">البيان</th>
                                     <th class="border-bottom-0">تاريخ البيان</th>
                                     <th class="border-bottom-0">العميل</th>
+                                    <th class="border-bottom-0">رقم الهاتف</th>
                                     <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">المقدمة المدفوعة</th>
+                                    <th class="border-bottom-0">مبلغ القسط</th>
                                     <th class="border-bottom-0">المبالغ المنصرفة</th>
                                     <th class="border-bottom-0">المبالغ المتبقية</th>
                                     <th class="border-bottom-0">تاريخ الدفع</th>
@@ -128,6 +129,7 @@
                                         <td>{{ $invoice->name }} </td>
                                         <td>{{ $invoice->invoice_date }}</td>
                                         <td>{{ $invoice->customers->name }}</td>
+                                        <td>{{ $invoice->customers->phone }}</td>
 
                                         <td>
                                             @if ($invoice->status == 1)
@@ -173,6 +175,9 @@
                                                         href="{{ URL::route('invoices.qist', [$invoice->id]) }}"><i
                                                             class=" text-success fas
                                                     fa-money-bill"></i>&nbsp;&nbsp;عرض الأقساط</a>
+                                                        <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}" data-toggle="modal" data-target="#addToTotalBuyModal_{{ $invoice->id }}">
+                                                            <i class="text-primary fas fa-plus-circle"></i>&nbsp;&nbsp;إضافة إلى اجمالي الفاتورة
+                                                        </a>
 
 
                                                 </div>
@@ -218,6 +223,34 @@
         </div>
     </div>
 
+    @foreach ($invoices as $invoice)
+        <!-- Modal for adding to total_buy -->
+        <div class="modal fade" id="addToTotalBuyModal_{{ $invoice->id }}" tabindex="-1" role="dialog" aria-labelledby="addToTotalBuyModalLabel_{{ $invoice->id }}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form action="{{ route('invoices.addToTotalBuy', $invoice->id) }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addToTotalBuyModalLabel_{{ $invoice->id }}">إضافة إلى اجمالي الفاتورة</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="add_amount_{{ $invoice->id }}">المبلغ المراد إضافته</label>
+                    <input type="number" step="0.01" name="add_amount" id="add_amount_{{ $invoice->id }}" class="form-control" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                  <button type="submit" class="btn btn-primary">إضافة</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    @endforeach
 
 
     </div>

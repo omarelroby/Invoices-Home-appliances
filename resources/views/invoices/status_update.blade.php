@@ -43,6 +43,10 @@
                             <input class="form-control" readonly value="{{$invoices->total_remain}}" name="total_remain" id="total_remain_remain" type="text" placeholder="المبلغ" required />
                         </div>
                         <div class="col-4">
+                            <label>قيمة القسط</label>
+                            <input class="form-control" readonly value="{{$invoices->intro_cash}}" name="intro_cash" type="text" placeholder="قيمة القسط" />
+                        </div>
+                        <div class="col-4">
                             <label>مبلغ القسط</label>
                             <input class="form-control" name="cash"   type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
                         </div>

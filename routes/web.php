@@ -87,3 +87,5 @@ Route::get('/{page}', 'AdminController@index');
 
 Route::get('invoices/{invoice}/qist', 'QistController@invoiceQist')->name('invoices.qist');
 
+Route::post('invoices/{invoice}/add-to-total-buy', 'InvoicesController@addToTotalBuy')->name('invoices.addToTotalBuy');
+

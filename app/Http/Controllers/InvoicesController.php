@@ -233,5 +233,17 @@ class InvoicesController extends Controller
 
     }
 
+    public function addToTotalBuy(Request $request, $invoice_id)
+    {
+        $request->validate([
+            'add_amount' => 'required|numeric|min:0.01',
+        ]);
+        $invoice = \App\invoices::findOrFail($invoice_id);
+        $invoice->total_buy += $request->add_amount;
+        $invoice->total_remain += $request->add_amount;
+        $invoice->save();
+        return redirect()->back()->with('success', 'تمت إضافة المبلغ إلى اجمالي الفاتورة والمتبقي بنجاح');
+    }
+
 
 }
