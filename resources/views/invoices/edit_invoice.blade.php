@@ -83,15 +83,19 @@
                             </div>
                             <div class="col-4">
                                 <label>المنصرف</label>
-                                <input class="form-control" value="{{$invoices->total_remain_buy}}" name="total_remain_buy" id="total_remain_buy" type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
+                                <input class="form-control" value="{{$invoices->total_buy}}" name="total_buy" id="total_remain_buy" type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
                             </div>
                             <div class="col-4">
-                                <label>مبلغ القسط</label>
+                                <label>مبلغ المقدمة</label>
                                 <input class="form-control" value="{{$invoices->intro_cash}}" name="intro_cash" id="intro_cash" type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
                             </div>
                             <div class="col-4">
+                                <label>مبلغ القسط</label>
+                                <input class="form-control" value="{{$invoices->qist}}" name="qist" type="text" placeholder="المبلغ" required   />
+                            </div>
+                            <div class="col-4">
                                 <label>المبلغ المتبقي</label>
-                                <input class="form-control" value="{{$invoices->total_remain_remain}}" readonly name="total_remain_remain" id="total_remain_remain" type="text" placeholder="المبلغ" required />
+                                <input class="form-control" value="{{$invoices->total_remain}}" readonly name="total_remain"   type="text" placeholder="المبلغ" required />
                             </div>
                             </div>
                         <div class="d-flex justify-content-center">

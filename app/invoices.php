@@ -18,7 +18,9 @@ class invoices extends Model
         'customer_id' ,
         'pay_date' ,
         'status' ,
+        'qist' ,
     ];
+
 
     protected $dates = ['deleted_at'];
 

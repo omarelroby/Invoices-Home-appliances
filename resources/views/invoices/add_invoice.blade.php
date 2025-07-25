@@ -85,8 +85,12 @@
                                 <input class="form-control" name="total_remain_buy" id="total_remain_buy" type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
                             </div>
                             <div class="col-4">
-                                <label>مبلغ القسط</label>
+                                <label>المقدمة </label>
                                 <input class="form-control" name="intro_cash" id="intro_cash" type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
+                            </div>
+                            <div class="col-4">
+                                <label>مبلغ القسط</label>
+                                <input class="form-control" name="qist"  type="text" placeholder="المبلغ" required oninput="calculateRemaining()" />
                             </div>
                             <div class="col-4">
                                 <label>المبلغ المتبقي</label>

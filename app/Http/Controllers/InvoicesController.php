@@ -89,6 +89,7 @@ class InvoicesController extends Controller
             'invoice_date' => $request->invoice_date,
             'total_buy' => $request->total_remain_buy,
             'intro_cash' => $request->intro_cash,
+            'qist' => $request->qist,
             'total_remain' => $request->total_remain_remain,
             'customer_id' => $request->customer_id,
          ]);
@@ -122,8 +123,9 @@ class InvoicesController extends Controller
             'name' => $request->name,
             'day_of_pay' => $request->day_of_pay,
             'invoice_date' => $request->invoice_date,
-            'total_buy' => $request->total_remain_buy,
+            'total_buy' => $request->total_buy,
             'intro_cash' => $request->intro_cash,
+            'qist' => $request->qist,
             'total_remain' => $request->total_remain_remain,
             'customer_id' => $request->customer_id,
         ]);

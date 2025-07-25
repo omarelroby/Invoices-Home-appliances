@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mt-4">
     <h2>قائمة الأقساط</h2>
-    <a href="{{ route('qist.create') }}" class="btn btn-primary mb-3">إضافة قسط جديد</a>
+    <!-- <a href="{{ route('qist.create') }}" class="btn btn-primary mb-3">إضافة قسط جديد</a> -->
     <form method="GET" action="" class="mb-4">
         <div class="form-row">
             <div class="form-group col-md-3">

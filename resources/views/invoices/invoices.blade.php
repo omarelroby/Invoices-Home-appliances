@@ -107,7 +107,9 @@
                                     <th class="border-bottom-0">العميل</th>
                                     <th class="border-bottom-0">رقم الهاتف</th>
                                     <th class="border-bottom-0">الحالة</th>
+                                    <th class="border-bottom-0"> المقدمة</th>
                                     <th class="border-bottom-0">مبلغ القسط</th>
+
                                     <th class="border-bottom-0">المبالغ المنصرفة</th>
                                     <th class="border-bottom-0">المبالغ المتبقية</th>
                                     <th class="border-bottom-0">تاريخ الدفع</th>
@@ -141,6 +143,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $invoice->intro_cash }}</td>
+                                        <td>{{ $invoice->qist }}</td>
                                         <td>{{ $invoice->total_buy }}</td>
                                         <td>{{ $invoice->total_remain }}</td>
                                         <td>{{ $invoice->day_of_pay }}</td>
