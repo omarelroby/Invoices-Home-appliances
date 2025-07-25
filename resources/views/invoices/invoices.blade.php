@@ -107,7 +107,7 @@
                                     <th class="border-bottom-0">العميل</th>
                                     <th class="border-bottom-0">الحالة</th>
                                     <th class="border-bottom-0">المقدمة المدفوعة</th>
-                                    <th class="border-bottom-0">المبالغ المدفوعة</th>
+                                    <th class="border-bottom-0">المبالغ المنصرفة</th>
                                     <th class="border-bottom-0">المبالغ المتبقية</th>
                                     <th class="border-bottom-0">تاريخ الدفع</th>
                                     <th class="border-bottom-0">تاريخ آخر دفع</th>
@@ -168,9 +168,11 @@
                                                         <a class="dropdown-item"
                                                             href="{{ URL::route('Status_show', [$invoice->id]) }}"><i
                                                                 class=" text-success fas
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    fa-money-bill"></i>&nbsp;&nbsp;تغير
-                                                            حالة
-                                                            الدفع</a>
+                                                        fa-money-bill"></i>&nbsp;&nbsp;دفع قسط جديد</a>
+                                                        <a class="dropdown-item"
+                                                        href="{{ URL::route('invoices.qist', [$invoice->id]) }}"><i
+                                                            class=" text-success fas
+                                                    fa-money-bill"></i>&nbsp;&nbsp;عرض الأقساط</a>
 
 
                                                 </div>
