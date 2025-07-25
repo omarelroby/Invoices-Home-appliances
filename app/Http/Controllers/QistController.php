@@ -27,6 +27,7 @@ class QistController extends Controller
                 $query->whereDate('date', $request->date);
             })
             ->get();
+             
         return view('qist.index', compact('qists'));
     }
 

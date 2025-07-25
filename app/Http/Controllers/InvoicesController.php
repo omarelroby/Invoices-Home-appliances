@@ -169,34 +169,29 @@ class InvoicesController extends Controller
 
     public function Status_Update($id, Request $request)
     {
-        $invoices = invoices::findOrFail($id);
-        if($invoices->status==1){
+        $invoice = invoices::findOrFail($id);
 
+        // If already completed
+        if ($invoice->status == 1) {
             session()->flash('تم إكمال الفاتورة بنجاح');
             return redirect('/invoices');
         }
-        else{
-            $remain=$invoices->total_remain_remain-$request->cash;
 
-            if($remain==0)
-            {
-                $invoices->status=1;
-                $invoices->total_remain=0;
-                $invoices->pay_date=$request->pay_date;
-                $invoices->save();
+        // Calculate remaining amount
+        $remain = $invoice->total_remain - $request->cash;
 
-            }
-            else
-            {
-
-                $remain=$request->total_remain-$request->cash;
-                $invoices->status=0;
-                $invoices->total_remain=$remain;
-                $invoices->pay_date=$request->pay_date;
-                $invoices->save();
-
-            }
+        if ($remain <= 0) {
+            // Invoice fully paid
+            $invoice->status = 1;
+            $invoice->total_remain = 0;
+        } else {
+            // Partial payment
+            $invoice->status = 0;
+            $invoice->total_remain = $remain;
         }
+
+        $invoice->pay_date = $request->pay_date;
+        $invoice->save();
 
         session()->flash('تم تحديث بيانات الدفع');
         return redirect('/invoices');
