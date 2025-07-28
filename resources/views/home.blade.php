@@ -29,9 +29,16 @@
                         <div class="d-flex">
                             <div class="">
                                 <h4 class="tx-20 font-weight-bold mb-1 text-white">
-
-                                    {{ number_format(\App\invoices::sum('total_buy'), 2) }}
+                                    @php
+                                    $total = \App\invoices::sum('total_buy');
+                                    @endphp
+                                    
                                 </h4>
+                                            <h3 class="tx-20 font-weight-bold mb-1 text-white">
+
+                                    {{ number_format($total, 2) }}
+
+                                </h3>
                                 <p class="mb-0 tx-12 text-white op-7">عدد الفواتير {{ \App\invoices::count() }} </p>
                             </div>
                             <span class="float-right my-auto mr-auto">
@@ -55,7 +62,7 @@
                             <div class="">
                                 <h3 class="tx-20 font-weight-bold mb-1 text-white">
 
-                                    {{ number_format(\App\invoices::where('status', 2)->sum('total_remain'), 2) }}
+                                    {{ number_format(\App\invoices::where('status', 2)->Orwhere('status',3)->sum('total_remain'), 2) }}
 
                                 </h3>
                                 <p class="mb-0 tx-12 text-white op-7">{{ \App\invoices::where('status', 2)->count() }}
@@ -96,9 +103,12 @@
                         <div class="d-flex">
                             <div class="">
                                 <h4 class="tx-20 font-weight-bold mb-1 text-white">
-                                    {{ number_format(\App\invoices::sum('total_buy') - \App\invoices::where('status', 1)->orWhere('status', 2)->sum('total_remain'), 2) }}
+                                    {{ number_format(
+                                        \App\invoices::whereIn('status', [2,3])->sum('total_buy') - \App\invoices::whereIn('status', [2,3])->sum('total_remain'),
+                                        2
+                                    ) }}
                                 </h4>
-                                <p class="mb-0 tx-12 text-white op-7">الفرق (ناقص)</p>
+                                <p class="mb-0 tx-12 text-white op-7">إجمالي المدفوع (للفواتير المتبقية وغير المدفوعة)</p>
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-minus-circle text-white"></i>

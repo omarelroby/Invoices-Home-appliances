@@ -23,83 +23,46 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // إجمالي الفواتير
+        $total_buy = invoices::sum('total_buy');
+        $total_count = invoices::count();
 
-//=================احصائية نسبة تنفيذ الحالات======================
+        // إجمالي المتبقي (باقي الفواتير)
+        $total_remain = invoices::whereIn('status', [2,3])->sum('total_remain');
+        $remain_count = invoices::whereIn('status', [2,3])->count();
 
+        // إجمالي المدفوع (للفواتير المتبقية وغير المدفوعة)
+        $total_paid = invoices::whereIn('status', [2,3])->sum('total_buy') - invoices::whereIn('status', [2,3])->sum('total_remain');
 
-
-      $count_all =invoices::count();
-      $count_invoices1 = invoices::where('status', 1)->count();
-      $count_invoices2 = invoices::where('status', 2)->count();
-      $count_invoices3 = invoices::where('status', 3)->count();
-
-      if($count_invoices2 == 0){
-          $nspainvoices2=0;
-      }
-      else{
-          $nspainvoices2 = $count_invoices2/ $count_all*100;
-      }
-
-        if($count_invoices1 == 0){
-            $nspainvoices1=0;
-        }
-        else{
-            $nspainvoices1 = $count_invoices1/ $count_all*100;
-        }
-
-        if($count_invoices3 == 0){
-            $nspainvoices3=0;
-        }
-        else{
-            $nspainvoices3 = $count_invoices3/ $count_all*100;
-        }
-
-
+        // Chart 1: Bar chart for sums
         $chartjs = app()->chartjs
-            ->name('barChartTest')
+            ->name('barChartSums')
             ->type('bar')
-            ->size(['width' => 350, 'height' => 200])
-            ->labels(['الفواتير الغير المدفوعة', 'الفواتير المدفوعة','الفواتير المدفوعة جزئيا'])
+            ->size(['width' => 400, 'height' => 200])
+            ->labels(['اجمالي الفواتير', 'اجمالي المتبقي', 'اجمالي المدفوع'])
             ->datasets([
                 [
-                    "label" => "الفواتير الغير المدفوعة",
-                    'backgroundColor' => ['#ec5858'],
-                    'data' => [$nspainvoices2]
-                ],
-                [
-                    "label" => "الفواتير المدفوعة",
-                    'backgroundColor' => ['#81b214'],
-                    'data' => [$nspainvoices1]
-                ],
-                [
-                    "label" => "الفواتير المدفوعة جزئيا",
-                    'backgroundColor' => ['#ff9642'],
-                    'data' => [$nspainvoices3]
-                ],
-
-
-            ])
-            ->options([]);
-
-
-        $chartjs_2 = app()->chartjs
-            ->name('pieChartTest')
-            ->type('pie')
-            ->size(['width' => 340, 'height' => 200])
-            ->labels(['الفواتير الغير المدفوعة', 'الفواتير المدفوعة','الفواتير المدفوعة جزئيا'])
-            ->datasets([
-                [
-                    'backgroundColor' => ['#ec5858', '#81b214','#ff9642'],
-                    'data' => [$nspainvoices2, $nspainvoices1,$nspainvoices3]
+                    "label" => "المبالغ",
+                    'backgroundColor' => ['#007bff', '#dc3545', '#28a745'],
+                    'data' => [$total_buy, $total_remain, $total_paid]
                 ]
             ])
             ->options([]);
 
+        // Chart 2: Pie chart for counts
+        $chartjs_2 = app()->chartjs
+            ->name('pieChartCounts')
+            ->type('pie')
+            ->size(['width' => 340, 'height' => 200])
+            ->labels(['كل الفواتير', 'باقي الفواتير', 'المدفوعة من الباقي'])
+            ->datasets([
+                [
+                    'backgroundColor' => ['#007bff', '#dc3545', '#28a745'],
+                    'data' => [$total_count, $remain_count, $total_paid > 0 ? 1 : 0]
+                ]
+            ])
+            ->options([]);
 
-
-
-
-        return view('home', compact('chartjs','chartjs_2'));
-
+        return view('home', compact('chartjs', 'chartjs_2'));
     }
 }
