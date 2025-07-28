@@ -215,7 +215,7 @@ class InvoicesController extends Controller
 
     public function Invoice_unPaid()
     {
-        $invoices = Invoices::where('status',0)->get();
+        $invoices = Invoices::where('status',3)->get();
         return view('invoices.invoices_unpaid',compact('invoices'));
     }
 

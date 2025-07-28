@@ -75,6 +75,8 @@
                                 <th class="border-bottom-0">تاريخ البيان</th>
                                 <th class="border-bottom-0">العميل</th>
                                 <th class="border-bottom-0">الحالة</th>
+                                <th class="border-bottom-0">قيمة القسط</th>
+
                                 <th class="border-bottom-0">المقدمة المدفوعة</th>
                                 <th class="border-bottom-0">المبالغ المدفوعة</th>
                                 <th class="border-bottom-0">المبالغ المتبقية</th>
@@ -99,16 +101,20 @@
 
                                     <td>
                                         @if ($invoice->status == 3)
-                                            <span class="text-success">مكتمل</span>
+                                            <span class="text-warning">غير مدفوعة</span>
                                         @elseif($invoice->status == 2)
                                             <span class="text-danger">متأخر</span>
+                                        @elseif($invoice->status == 1)
+                                            <span class="text-success">مكتمل</span>
                                         @else
-                                            <span class="text-warning">غير مكتمل</span>
+                                            <span class="text-secondary">غير معروف</span>
                                         @endif
                                     </td>
+                                    <td>{{ $invoice->qist }}</td>
+
                                     <td>{{ $invoice->intro_cash }}</td>
-                                    <td>{{ $invoice->total_remain_buy }}</td>
-                                    <td>{{ $invoice->total_remain_remain }}</td>
+                                    <td>{{ $invoice->total_buy }}</td>
+                                    <td>{{ $invoice->total_remain }}</td>
                                     <td>{{ $invoice->day_of_pay }}</td>
 
 
