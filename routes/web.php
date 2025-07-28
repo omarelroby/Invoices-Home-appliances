@@ -26,8 +26,7 @@ Route::resource('customers', 'CustomersController');
 Route::get('/Status_show/{id}', 'InvoicesController@show')->name('Status_show');
 Route::resource('invoices', 'InvoicesController');
 Route::resource('qist', 'QistController')->only(['index', 'create', 'store']);
-
-
+Route::post('/qist/store', [InvoicesController::class, 'storeQist'])->name('qists.store');
 
 //End New
 

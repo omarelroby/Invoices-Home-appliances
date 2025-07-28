@@ -23,7 +23,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('Status_Update', ['id' => $invoices->id]) }}" method="post" autocomplete="off">
+                    <form action="{{ route('Status_Update', ['id' => $invoice->id]) }}" method="post" autocomplete="off">
                         {{ csrf_field() }}
                         <div class="col-4">
                             <label for="pay_date">تاريخ الفاتورة</label>
@@ -40,11 +40,11 @@
                         </div>
                         <div class="col-4">
                             <label>المبلغ المتبقي</label>
-                            <input class="form-control" readonly value="{{$invoices->total_remain}}" name="total_remain" id="total_remain_remain" type="text" placeholder="المبلغ" required />
+                            <input class="form-control" readonly value="{{$invoice->total_remain}}" name="total_remain" id="total_remain_remain" type="text" placeholder="المبلغ" required />
                         </div>
                         <div class="col-4">
                             <label>قيمة القسط</label>
-                            <input class="form-control" readonly value="{{$invoices->intro_cash}}" name="intro_cash" type="text" placeholder="قيمة القسط" />
+                            <input class="form-control" readonly value="{{$invoice->intro_cash}}" name="intro_cash" type="text" placeholder="قيمة القسط" />
                         </div>
                         <div class="col-4">
                             <label>مبلغ القسط</label>

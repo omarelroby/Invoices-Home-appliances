@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Notifications\AddInvoice;
 use App\Exports\InvoicesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Qist; // Make sure this is at the top
 
 class InvoicesController extends Controller
 {
@@ -102,8 +103,9 @@ class InvoicesController extends Controller
 
     public function show($id)
     {
-        $invoices = invoices::where('id', $id)->first();
-        return view('invoices.status_update', compact('invoices'));
+        $invoice = invoices::where('id', $id)->first();
+        $qists = \App\Qist::where('invoice_id', $id)->get();
+        return view('invoices.status_update', compact('invoice', 'qists'));
     }
 
 
@@ -126,7 +128,7 @@ class InvoicesController extends Controller
             'total_buy' => $request->total_buy,
             'intro_cash' => $request->intro_cash,
             'qist' => $request->qist,
-            'total_remain' => $request->total_remain_remain,
+            'total_remain' => $request->total_remain,
             'customer_id' => $request->customer_id,
         ]);
         session()->flash('edit', 'تم تعديل الفاتورة بنجاح');
@@ -179,6 +181,13 @@ class InvoicesController extends Controller
 
         // Calculate remaining amount
         $remain = $invoice->total_remain - $request->cash;
+
+        // Store the qist (installment)
+        Qist::create([
+            'cash' => $request->cash,
+            'invoice_id' => $invoice->id,
+            'date' => $request->pay_date,
+        ]);
 
         if ($remain <= 0) {
             // Invoice fully paid
@@ -242,5 +251,16 @@ class InvoicesController extends Controller
         return redirect()->back()->with('success', 'تمت إضافة المبلغ إلى اجمالي الفاتورة والمتبقي بنجاح');
     }
 
+    public function storeQist(Request $request)
+    {
+        $validated = $request->validate([
+            'cash' => 'required|numeric',
+            'invoice_id' => 'required|exists:invoices,id',
+            'date' => 'required|date',
+        ]);
 
+        Qist::create($validated);
+
+        return redirect()->back()->with('success', 'تم حفظ القسط بنجاح');
+    }
 }
