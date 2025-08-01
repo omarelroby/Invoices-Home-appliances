@@ -33,8 +33,8 @@
                 <th>المبلغ</th>
                 <th>رقم الفاتورة</th>
                 <th>اسم العميل</th>
+                <th>المقدمة المدفوعة</th> <!-- New column -->
                 <th>التاريخ</th>
-
             </tr>
         </thead>
         <tbody>
@@ -44,8 +44,8 @@
                     <td>{{ $qist->cash }}</td>
                     <td>{{ $qist->invoice->name ?? '' }}</td>
                     <td>{{ $qist->invoice->customers->name ?? '' }}</td>
+                    <td>{{ $qist->invoice->intro_cash ?? '' }}</td> <!-- Show intro_cash -->
                     <td>{{ $qist->date }}</td>
-
                 </tr>
             @endforeach
         </tbody>
