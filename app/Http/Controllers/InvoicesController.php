@@ -60,9 +60,14 @@ class InvoicesController extends Controller
                 ]);
             }
             // Otherwise, mark it as complete
-            else {
+            elseif($invoice->total_remain <= 0) {
                 $invoice->update([
                     'status' => 1, // Complete
+                ]);
+            }
+            else {
+                $invoice->update([
+                    'status' => 3, // Unpaid
                 ]);
             }
         }
