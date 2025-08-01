@@ -98,6 +98,7 @@ class InvoicesController extends Controller
             'qist' => $request->qist,
             'total_remain' => $request->total_remain_remain,
             'customer_id' => $request->customer_id,
+            'note' => $request->note,
          ]);
 
 
@@ -135,6 +136,7 @@ class InvoicesController extends Controller
             'qist' => $request->qist,
             'total_remain' => $request->total_remain,
             'customer_id' => $request->customer_id,
+            'note' => $request->note,
         ]);
         session()->flash('edit', 'تم تعديل الفاتورة بنجاح');
         return redirect()->route('invoices.index');
@@ -246,14 +248,12 @@ class InvoicesController extends Controller
 
     public function addToTotalBuy(Request $request, $invoice_id)
     {
-        $request->validate([
-            'add_amount' => 'required|numeric|min:0.01',
-        ]);
-        $invoice = \App\invoices::findOrFail($invoice_id);
+        $invoice = invoices::findOrFail($invoice_id);
         $invoice->total_buy += $request->add_amount;
-        $invoice->total_remain += $request->add_amount;
+        $invoice->note = $request->note; // Update note
         $invoice->save();
-        return redirect()->back()->with('success', 'تمت إضافة المبلغ إلى اجمالي الفاتورة والمتبقي بنجاح');
+
+        return redirect()->route('invoices.index')->with('success', 'تمت إضافة المبلغ وتحديث الملاحظات بنجاح');
     }
 
     public function storeQist(Request $request)

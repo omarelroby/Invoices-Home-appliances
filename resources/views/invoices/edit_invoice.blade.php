@@ -97,6 +97,10 @@
                                 <label>المبلغ المتبقي</label>
                                 <input class="form-control" value="{{$invoices->total_remain}}" readonly name="total_remain"   type="text" placeholder="المبلغ" required />
                             </div>
+                            <div class="col-12">
+                                <label for="note">ملاحظات</label>
+                                <textarea name="note" id="note" class="form-control" rows="3">{{ old('note', $invoices->note) }}</textarea>
+                            </div>
                             </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary">حفظ البيانات</button>

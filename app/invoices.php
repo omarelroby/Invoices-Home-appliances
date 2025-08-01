@@ -19,6 +19,7 @@ class invoices extends Model
         'pay_date' ,
         'status' ,
         'qist' ,
+        'note',
     ];
 
 

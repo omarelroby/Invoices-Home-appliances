@@ -99,9 +99,10 @@
 
                         </div>
 
-
-
-
+                        <div class="form-group">
+                            <label for="note">ملاحظات</label>
+                            <textarea name="note" id="note" class="form-control">{{ old('note', $invoice->note ?? '') }}</textarea>
+                        </div>
 
                         <br>
 

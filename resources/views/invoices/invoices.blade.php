@@ -116,6 +116,7 @@
                                     <th class="border-bottom-0">تاريخ آخر دفع</th>
 
                                     <th class="border-bottom-0">العمليات</th>
+                                    <th class="border-bottom-0">ملاحظات</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -187,6 +188,7 @@
                                             </div>
 
                                         </td>
+                                        <td>{{ $invoice->note }}</td>
                                     </tr>
                                 @endforeach
 
@@ -243,6 +245,10 @@
                   <div class="form-group">
                     <label for="add_amount_{{ $invoice->id }}">المبلغ المراد إضافته</label>
                     <input type="number" step="0.01" name="add_amount" id="add_amount_{{ $invoice->id }}" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="note_{{ $invoice->id }}">ملاحظات</label>
+                    <textarea name="note" id="note_{{ $invoice->id }}" class="form-control" rows="2">{{ old('note', $invoice->note) }}</textarea>
                   </div>
                 </div>
                 <div class="modal-footer">
